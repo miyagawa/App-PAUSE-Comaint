@@ -1,20 +1,36 @@
 NAME
-    App::PAUSE::Comaint -
+    comaint - Make someone comaint of your module on PAUSE
 
 SYNOPSIS
-      use App::PAUSE::Comaint;
+      comaint DBI FLORA
 
 DESCRIPTION
-    App::PAUSE::Comaint is
+    "comaint" is a command-line script to automate the process of logging in
+    to PAUSE and making other PAUSE author as a co-maintainer of your
+    module.
+
+    The script will automatically fetch the list of packages included in the
+    distribution that your given module belongs to. For example, if you run:
+
+      comaint Plack MIYAGAWA
+
+    it will gather all packages included in the Plack distribution, and try
+    to make MIYAGAWA as a comaint.
+
+    The script is written in a defensive manner so that if you specify a
+    module that you don't have a primary maintainership, it will complain
+    about that.
+
+    There's also a prompt before actually making someone a co-maint.
+
+PREREQUISITES
+    *   You have to have a CPAN mirror cache in "~/.cpanm" to find the
+        related packages. You can run `cpanm --mirror-only strict` once to
+        get that cache.
+
+    *   Your PAUSE credentials have to be saved in "~/.pause" file, the same
+        as the one used by CPAN uploader.
 
 AUTHOR
-    Tatsuhiko Miyagawa <miyagawa@bulknews.net>
+    Tatsuhiko Miyagawa
 
-COPYRIGHT
-    Copyright 2013- Tatsuhiko Miyagawa
-
-LICENSE
-    This library is free software; you can redistribute it and/or modify it
-    under the same terms as Perl itself.
-
-SEE ALSO

@@ -112,15 +112,7 @@ __END__
 
 =head1 NAME
 
-App::PAUSE::Comaint -
-
-=head1 SYNOPSIS
-
-  use App::PAUSE::Comaint;
-
-=head1 DESCRIPTION
-
-App::PAUSE::Comaint is
+App::PAUSE::Comaint - Make someone co-maint of your module on PAUSE/CPAN
 
 =head1 AUTHOR
 
@@ -136,5 +128,7 @@ This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =head1 SEE ALSO
+
+L<comaint>
 
 =cut
