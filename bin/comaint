@@ -12,7 +12,7 @@ comaint - Make someone comaint of your module on PAUSE
 
 =head1 SYNOPSIS
 
-  comaint DBI FLORA
+  comaint App::ForkProve FLORA
 
 =head1 DESCRIPTION
 
