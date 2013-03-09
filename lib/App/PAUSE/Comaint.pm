@@ -4,73 +4,30 @@ use strict;
 use 5.008_001;
 our $VERSION = '0.01';
 
-package App::PAUSE::Comaint::PackageScanner;
-use Moo;
-has 'file', is => 'rw';
-
-use constant DONE => "SCAN_DONE\n";
-
-sub find {
-    my($self, $want) = @_;
-
-    my $found;
-
-    $self->scan(sub {
-        my($module, $version, $dist) = @_;
-        if ($module eq $want) {
-            $found = $dist;
-            die DONE;
-        }
-    });
-
-    my @packages;
-
-    if ($found) {
-        $self->scan(sub {
-            my($module, $version, $dist) = @_;
-            push @packages, $module if $dist eq $found;
-        });
-    }
-
-    return @packages;
-}
-
-sub scan {
-    my($self, $cb) = @_;
-
-    open my $fh, "<", $self->file
-        or die "$!: run `cpanm --mirror-only strict` to regenerate 02packages cache\n";
-    my $in_header = 1;
-    while (<$fh>) {
-        if (/^$/) {
-            $in_header = 0;
-            next;
-        }
-        next if $in_header;
-
-        if (/^(\S+)\s+(\S+)  (\S+)/) {
-            eval { $cb->($1, $2, $3) };
-            return if $@ eq DONE;
-            die $@ if $@;
-        }
-    }
-}
-
-
-package App::Comaint;
-use Moo;
+use App::PAUSE::Comaint::PackageScanner;
 use WWW::Mechanize;
 use ExtUtils::MakeMaker qw(prompt);
 
-has 'mech', is => 'rw';
+sub new {
+    my($class) = @_;
+    bless { mech => WWW::Mechanize->new }, $class;
+}
+
+sub mech { $_[0]->{mech} }
 
 sub run {
     my($self, $module, $comaint) = @_;
 
-    my $scanner = PackageScanner->new(file => "$ENV{HOME}/.cpanm/sources/http%www.cpan.org/02packages.details.txt");
+    unless ($module && $comaint) {
+        die "Usage: comaint Module AUTHOR\n";
+    }
+
+    my $scanner = App::PAUSE::Comaint::PackageScanner->new(
+        "$ENV{HOME}/.cpanm/sources/http%www.cpan.org/02packages.details.txt",
+    );
     my @packages = $scanner->find($module);
 
-    @packages or die "Couldn't find moduel $module in 02packages\n";
+    @packages or die "Couldn't find module '$module' in 02packages\n";
 
     $self->login_pause;
     $self->make_comaint($comaint, \@packages);
@@ -119,7 +76,11 @@ sub make_comaint {
     }
 
     if (keys %try) {
-        die "Couldn't find following modules in your maint list: ", join(", ", sort keys %try), "\n";
+        my $msg = "Couldn't find following modules in your maint list:\n";
+        for my $module (sort keys %try) {
+            $msg .= "  $module\n";
+        }
+        die $msg;
     }
 
     $form->find_input("pause99_share_perms_makeco_a")->value($author);
