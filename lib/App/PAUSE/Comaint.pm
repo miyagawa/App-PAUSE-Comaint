@@ -49,7 +49,6 @@ sub get_credentials {
 sub login_pause {
     my $self = shift;
 
-    $self->mech(WWW::Mechanize->new);
     $self->mech->credentials($self->get_credentials);
     $self->mech->get("https://pause.perl.org/pause/authenquery?ACTION=share_perms");
 
