@@ -23,13 +23,14 @@ module.
 The script will automatically fetch the list of packages included in
 the distribution that your given module belongs to. For example, if you run:
 
-  comaint Plack MIYAGAWA
+  comaint Plack::Middleware::ReverseProxy MIYAGAWA
 
-it will gather all packages included in the Plack distribution, and
-try to make MIYAGAWA as a comaint.
+it will gather all packages included in the
+Plack-Middleware-ReverseProxy distribution, and try to make MIYAGAWA
+as a comaint for all of them.
 
 The script is written in a defensive manner so that if you specify a
-module that you don't have a primary maintainership, it will complain
+module that you don't have a primary maintainership on, it will complain
 about that.
 
 There's also a prompt before actually making someone a co-maint.
