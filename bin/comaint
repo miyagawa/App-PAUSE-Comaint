@@ -1,0 +1,7 @@
+#!perl
+use strict;
+use App::PAUSE::Comaint;
+
+App::PAUSE::Comaint->new->run(@ARGV);
+
+
