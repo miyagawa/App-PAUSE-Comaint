@@ -1,6 +1,11 @@
 MYMETA.*
 META.*
 Makefile
-inc/
 pm_to_blib
 *~
+/App-PAUSE-Comaint-*
+/.build
+/_build_params
+/Build
+!Build/
+!META.json
