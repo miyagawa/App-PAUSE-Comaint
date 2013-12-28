@@ -1,0 +1,58 @@
+#!perl
+use strict;
+use App::PAUSE::Comaint;
+
+App::PAUSE::Comaint->new->run_abandon(@ARGV);
+
+__END__
+
+=head1 NAME
+
+abandon-comaint - Abandon comaint of a module on PAUSE
+
+=head1 SYNOPSIS
+
+  abandon-comaint App::ForkProve [ Catalyst::Model::Akismet ... ]
+
+=head1 DESCRIPTION
+
+C<abandon-comaint> is a command-line script to automate the process of logging
+in to PAUSE and giving up co-maint that some other PAUSE author gave you.
+
+The script will automatically fetch the list of packages included in
+the distribution that the given module belongs to. For example, if you run:
+
+  abandon-comaint Plack::Middleware::ReverseProxy
+
+it will gather all packages included in the
+Plack-Middleware-ReverseProxy distribution, and try to give up
+comaint for all of them.
+
+The script is written in a defensive manner so that if you specify a
+module that you don't have a primary maintainership on, it will complain
+about that.
+
+There's also a prompt before actually giving up co-maint.
+
+=head1 PREREQUISITES
+
+=over 4
+
+=item *
+
+You have to have a CPAN mirror cache in C<~/.cpanm> to find the
+related packages. You can run `cpanm --mirror-only strict` once to get
+that cache.
+
+=item *
+
+Your PAUSE credentials have to be saved in C<~/.pause> file, the same
+as the one used by CPAN uploader.
+
+=back
+
+=head1 AUTHOR
+
+Tatsuhiko Miyagawa
+
+=cut

@@ -1,4 +1,6 @@
 Revision history for Perl extension App::PAUSE::Comaint
 
+        - add abandon-comaint command (Arthur Axel fREW Schmidt)
+
 0.01  Fri Mar  8 19:35:22 2013
         - original version
