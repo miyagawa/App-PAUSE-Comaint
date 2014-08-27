@@ -22,6 +22,10 @@ sub run {
         die "Usage: comaint Module AUTHOR\n";
     }
 
+    if ($module =~ /^[A-Z]+$/ && $comaint =~ /::/) {
+        die "Usage: comaint Module AUTHOR\n";
+    }
+
     my $scanner = App::PAUSE::Comaint::PackageScanner->new(
         "$ENV{HOME}/.cpanm/sources/http%www.cpan.org/02packages.details.txt",
     );
