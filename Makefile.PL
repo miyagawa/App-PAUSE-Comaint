@@ -3,6 +3,7 @@ all_from 'lib/App/PAUSE/Comaint.pm';
 readme_from('bin/comaint');
 install_script 'bin/comaint';
 build_requires 'Test::More', 0.88;
+requires 'LWP::Protocol::https';
 requires 'WWW::Mechanize';
 test_requires 'Test::Requires';
 auto_set_repository();
