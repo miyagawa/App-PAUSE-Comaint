@@ -2,5 +2,10 @@ Revision history for Perl extension App::PAUSE::Comaint
 
 {{$NEXT}}
 
+0.02  2014-09-18 14:02:55 JST
+        - Fix dependencies
+        - Detect errors in the argument order
+        - Use Milla
+
 0.01  Fri Mar  8 19:35:22 2013
         - original version

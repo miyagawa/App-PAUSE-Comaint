@@ -17,4 +17,4 @@ it under the same terms as Perl itself.
 
 # SEE ALSO
 
-[comaint](http://search.cpan.org/perldoc?comaint)
+[comaint](https://metacpan.org/pod/comaint)
