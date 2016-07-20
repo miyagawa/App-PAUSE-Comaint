@@ -1,4 +1,5 @@
 requires 'WWW::Mechanize';
+requires 'LWP::UserAgent';
 requires 'LWP::Protocol::https';
 requires 'perl', '5.008001';
 
