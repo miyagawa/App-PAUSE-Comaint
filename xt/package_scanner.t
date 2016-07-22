@@ -8,7 +8,7 @@ my $scanner = App::PAUSE::Comaint::PackageScanner->new('http://cpanmetadb.plackp
 
 my @packages = $scanner->find('App::PAUSE::Comaint');
 is @packages, 2;
-is_deeply [sort @packages], [qw/App::PAUSE::Comaint App::PAUSE::Comaint::PackageScanner/];
+is_deeply \@packages, [qw/App::PAUSE::Comaint App::PAUSE::Comaint::PackageScanner/];
 
 @packages = $scanner->find('NotExistModule');
 is @packages, 0;

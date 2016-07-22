@@ -26,7 +26,7 @@ sub find {
     return unless $res->is_success;
 
     my $package = YAML::Load($res->content);
-    return keys %{ $package->{provides} };
+    return sort keys %{ $package->{provides} };
 }
 
 1;
