@@ -8,7 +8,7 @@ sub new {
     my($class, $base_url) = @_;
     my $self = {
         ua          => LWP::UserAgent->new(agent => __PACKAGE__),
-        api_version => 'v1.1',
+        api_version => 'v1.0',
         base_url    => $base_url,
     };
     bless $self, $class;
