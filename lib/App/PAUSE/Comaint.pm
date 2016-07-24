@@ -2,7 +2,7 @@ package App::PAUSE::Comaint;
 
 use strict;
 use 5.008_001;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use App::PAUSE::Comaint::PackageScanner;
 use WWW::Mechanize;

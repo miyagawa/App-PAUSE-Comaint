@@ -2,6 +2,9 @@ Revision history for Perl extension App::PAUSE::Comaint
 
 {{$NEXT}}
 
+0.04  2016-07-24 11:37:17 PDT
+        - Add Pause::Permissions #6
+
 0.03  2016-07-24 11:22:55 PDT
         - Show the current maintainer
         - Get the list of packages from cpanmetadb, no need for cpanm mirror cache (karupanerura) #5
