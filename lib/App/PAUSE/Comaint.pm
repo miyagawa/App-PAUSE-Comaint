@@ -7,7 +7,6 @@ our $VERSION = '0.03';
 use App::PAUSE::Comaint::PackageScanner;
 use WWW::Mechanize;
 use ExtUtils::MakeMaker qw(prompt);
-use PAUSE::Permissions;
 
 sub new {
     my($class) = @_;
@@ -78,6 +77,7 @@ sub make_comaint {
     }
 
     if (keys %try) {
+        require PAUSE::Permissions;
         my $perms = PAUSE::Permissions->new(preload => 1);
         my $msg = "You don't seem to be a primary maintainer of the following modules:\n";
         for my $module (sort keys %try) {
