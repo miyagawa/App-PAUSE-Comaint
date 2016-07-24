@@ -77,12 +77,9 @@ sub make_comaint {
     }
 
     if (keys %try) {
-        require PAUSE::Permissions;
-        my $perms = PAUSE::Permissions->new(preload => 1);
         my $msg = "You don't seem to be a primary maintainer of the following modules:\n";
         for my $module (sort keys %try) {
-            my $perm = $perms->module_permissions($module);
-            $msg .= sprintf "  %s (%s)\n", $module, $perm->owner;
+            $msg .= "  $module\n";
         }
         die $msg;
     }
