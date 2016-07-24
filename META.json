@@ -39,7 +39,6 @@
          "requires" : {
             "LWP::Protocol::https" : "0",
             "LWP::UserAgent" : "0",
-            "PAUSE::Permissions" : "0",
             "WWW::Mechanize" : "0",
             "perl" : "5.008001"
          }
@@ -63,7 +62,7 @@
          "web" : "https://github.com/miyagawa/App-PAUSE-Comaint"
       }
    },
-   "version" : "0.04",
+   "version" : "0.05",
    "x_contributors" : [
       "Fuji, Goro (gfx) <goro-fuji@cookpad.com>",
       "karupanerura <karupa@cpan.org>"

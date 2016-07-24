@@ -2,6 +2,9 @@ Revision history for Perl extension App::PAUSE::Comaint
 
 {{$NEXT}}
 
+0.05  2016-07-24 11:43:28 PDT
+        - remove the option to show the current maintainer
+
 0.04  2016-07-24 11:37:17 PDT
         - Add Pause::Permissions #6
 
