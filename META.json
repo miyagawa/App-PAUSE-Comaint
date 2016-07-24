@@ -38,6 +38,7 @@
       "runtime" : {
          "requires" : {
             "LWP::Protocol::https" : "0",
+            "LWP::UserAgent" : "0",
             "WWW::Mechanize" : "0",
             "perl" : "5.008001"
          }

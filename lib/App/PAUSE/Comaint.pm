@@ -27,9 +27,7 @@ sub run {
         die "Usage: comaint Module AUTHOR\n";
     }
 
-    my $scanner = App::PAUSE::Comaint::PackageScanner->new(
-        "$ENV{HOME}/.cpanm/sources/http%www.cpan.org/02packages.details.txt",
-    );
+    my $scanner = App::PAUSE::Comaint::PackageScanner->new('http://cpanmetadb.plackperl.org');
     my @packages = $scanner->find($module);
 
     @packages or die "Couldn't find module '$module' in 02packages\n";

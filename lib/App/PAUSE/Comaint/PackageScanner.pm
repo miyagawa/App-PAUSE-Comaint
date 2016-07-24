@@ -1,59 +1,32 @@
 package App::PAUSE::Comaint::PackageScanner;
 use strict;
-use constant DONE => "SCAN_DONE\n";
+
+use LWP::UserAgent;
+use YAML;
 
 sub new {
-    my($class, $file) = @_;
-    my $self = { file => $file };
+    my($class, $base_url) = @_;
+    my $self = {
+        ua          => LWP::UserAgent->new(agent => __PACKAGE__),
+        api_version => 'v1.0',
+        base_url    => $base_url,
+    };
     bless $self, $class;
 }
 
-sub file { $_[0]->{file} }
+sub ua          { $_[0]->{ua}          }
+sub base_url    { $_[0]->{base_url}    }
+sub api_version { $_[0]->{api_version} }
 
 sub find {
     my($self, $want) = @_;
 
-    my $found;
+    my $url = sprintf '%s/%s/package/%s', $self->base_url, $self->api_version, $want;
+    my $res = $self->ua->get($url);
+    return unless $res->is_success;
 
-    $self->scan(sub {
-        my($module, $version, $dist) = @_;
-        if ($module eq $want) {
-            $found = $dist;
-            die DONE;
-        }
-    });
-
-    my @packages;
-
-    if ($found) {
-        $self->scan(sub {
-            my($module, $version, $dist) = @_;
-            push @packages, $module if $dist eq $found;
-        });
-    }
-
-    return @packages;
-}
-
-sub scan {
-    my($self, $cb) = @_;
-
-    open my $fh, "<", $self->file
-        or die "$!: run `cpanm --mirror-only strict` to regenerate 02packages cache\n";
-    my $in_header = 1;
-    while (<$fh>) {
-        if (/^$/) {
-            $in_header = 0;
-            next;
-        }
-        next if $in_header;
-
-        if (/^(\S+)\s+(\S+)  (\S+)/) {
-            eval { $cb->($1, $2, $3) };
-            return if $@ eq DONE;
-            die $@ if $@;
-        }
-    }
+    my $package = YAML::Load($res->content);
+    return sort keys %{ $package->{provides} };
 }
 
 1;
