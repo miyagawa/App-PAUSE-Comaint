@@ -2,6 +2,9 @@ Revision history for Perl extension App::PAUSE::Comaint
 
 {{$NEXT}}
 
+0.06  2016-07-24 11:51:44 PDT
+        - Add missing YAML dependency
+
 0.05  2016-07-24 11:43:28 PDT
         - remove the option to show the current maintainer
 
