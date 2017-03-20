@@ -97,8 +97,8 @@ sub make_comaint {
 
     $self->mech->click_button(value => 'Make Co-Maintainer');
 
-    if ($self->mech->content =~ /<p>(Added .* to co-maint.*)<\/p>/) {
-        print "\n", $1, "\n";
+    if (my @results = ($self->mech->content =~ /<p>(Added .*? to co-maint.*?|\w+ was already a co-maint.*?: skipping)<\/p>/g)) {
+        print "\n", join("\n", @results), "\n";
     } else {
         warn "Something's wrong: ", $self->mech->content;
     }
