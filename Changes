@@ -2,6 +2,9 @@ Revision history for Perl extension App::PAUSE::Comaint
 
 {{$NEXT}}
 
+0.07  2017-03-20 11:38:21 PDT
+        - Handle users who already have comaints (ilmari) #7
+
 0.06  2016-07-24 11:51:44 PDT
         - Add missing YAML dependency
 
