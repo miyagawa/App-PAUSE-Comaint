@@ -38,11 +38,16 @@ sub run {
 sub get_credentials {
     my $self = shift;
 
-    open my $in, "<", "$ENV{HOME}/.pause"
-        or die "Can't open ~/.pause: $!";
     my %rc;
-    while (<$in>) {
-        /^(\S+)\s+(.*)/ and $rc{$1} = $2;
+    my $file = "$ENV{HOME}/.pause";
+    if (eval { require Config::Identity }) {
+        %rc = Config::Identity->load($file);
+    } else {
+        open my $in, "<", $file
+            or die "Can't open $file: $!";
+        while (<$in>) {
+            /^(\S+)\s+(.*)/ and $rc{$1} = $2;
+        }
     }
 
     return @rc{qw(user password)};
